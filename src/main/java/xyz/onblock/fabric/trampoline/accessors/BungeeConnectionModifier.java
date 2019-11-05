@@ -1,4 +1,4 @@
-package me.i509.fabric.trampoline.accessors;
+package xyz.onblock.fabric.trampoline.accessors;
 
 import java.net.InetSocketAddress;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package me.i509.fabric.trampoline.mixin;
+package xyz.onblock.fabric.trampoline.mixin;
 
 import java.io.IOException;
 
@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-import me.i509.fabric.trampoline.accessors.HandshakeC2SPacketModifier;
+import xyz.onblock.fabric.trampoline.accessors.HandshakeC2SPacketModifier;
 import net.minecraft.network.NetworkState;
 import net.minecraft.server.network.packet.HandshakeC2SPacket;
 import net.minecraft.util.PacketByteBuf;

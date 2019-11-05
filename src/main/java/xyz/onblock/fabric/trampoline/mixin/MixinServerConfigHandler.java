@@ -1,4 +1,4 @@
-package me.i509.fabric.trampoline.mixin;
+package xyz.onblock.fabric.trampoline.mixin;
 
 import java.util.Collection;
 

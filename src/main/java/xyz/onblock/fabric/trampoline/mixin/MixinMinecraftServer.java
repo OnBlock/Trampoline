@@ -1,4 +1,4 @@
-package me.i509.fabric.trampoline.mixin;
+package xyz.onblock.fabric.trampoline.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

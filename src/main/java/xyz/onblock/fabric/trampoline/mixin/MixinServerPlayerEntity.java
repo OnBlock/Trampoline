@@ -1,12 +1,12 @@
-package me.i509.fabric.trampoline.mixin;
+package xyz.onblock.fabric.trampoline.mixin;
 
 import java.net.InetSocketAddress;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-import me.i509.fabric.trampoline.accessors.BungeeProxiedPlayer;
-import me.i509.fabric.trampoline.accessors.BungeeConnectionModifier;
+import xyz.onblock.fabric.trampoline.accessors.BungeeProxiedPlayer;
+import xyz.onblock.fabric.trampoline.accessors.BungeeConnectionModifier;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 

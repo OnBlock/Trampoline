@@ -1,4 +1,4 @@
-package me.i509.fabric.trampoline;
+package xyz.onblock.fabric.trampoline;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.CommandDispatcher;
@@ -7,9 +7,8 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.tree.ArgumentCommandNode;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.mojang.brigadier.tree.RootCommandNode;
-import me.i509.fabric.trampoline.accessors.BungeeProxiedPlayer;
+import xyz.onblock.fabric.trampoline.accessors.BungeeProxiedPlayer;
 import net.fabricmc.api.DedicatedServerModInitializer;
-import net.fabricmc.fabric.api.registry.CommandRegistry;
 import net.minecraft.command.EntitySelector;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -26,7 +25,8 @@ import org.apache.logging.log4j.Logger;
 import static net.minecraft.command.arguments.EntityArgumentType.getPlayer;
 import static net.minecraft.command.arguments.EntityArgumentType.player;
 
-public class TrampolineServerMod implements DedicatedServerModInitializer {
+public class Trampoline implements DedicatedServerModInitializer {
+    public static CommandDispatcher<ServerCommandSource> dispatcher;
     public static final Logger LOGGER = LogManager.getLogger("Fabric-Trampoline");
     public static final String PREFIX = "[Trampoline-Fabric] ";
 
@@ -39,13 +39,12 @@ public class TrampolineServerMod implements DedicatedServerModInitializer {
         LOGGER.info(PREFIX + "Enabling Trampoline");
         LOGGER.warn(PREFIX + "The server is in offline mode to allow connection to Bungeecord. Please secure your server using the tutorial below, otherwise anyone can join the server:");
         LOGGER.warn(PREFIX + "https://www.spigotmc.org/wiki/firewall-guide/");
-        CommandRegistry.INSTANCE.register(true, this::registerCommands);
     }
 
     private void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
         RootCommandNode<ServerCommandSource> root = dispatcher.getRoot();
 
-        LiteralCommandNode<ServerCommandSource> bungee = CommandManager.literal("bungee-trampoline").executes(this::aboutThis).build();
+        LiteralCommandNode<ServerCommandSource> bungee = CommandManager.literal("fungee").executes(this::aboutThis).build();
         LiteralCommandNode<ServerCommandSource> redirect = CommandManager.literal("trampoline").redirect(bungee).build();
 
         LiteralCommandNode<ServerCommandSource> info = CommandManager.literal("info").requires(s -> s.hasPermissionLevel(4)).executes(this::getInfoSelf).build();

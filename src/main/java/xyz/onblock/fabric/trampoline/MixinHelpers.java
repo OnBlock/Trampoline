@@ -1,9 +1,9 @@
-package me.i509.fabric.trampoline;
+package xyz.onblock.fabric.trampoline;
 
 import com.google.gson.Gson;
 
-import me.i509.fabric.trampoline.accessors.BungeeConnectionModifier;
-import me.i509.fabric.trampoline.accessors.HandshakeC2SPacketModifier;
+import xyz.onblock.fabric.trampoline.accessors.BungeeConnectionModifier;
+import xyz.onblock.fabric.trampoline.accessors.HandshakeC2SPacketModifier;
 import net.minecraft.client.network.packet.LoginDisconnectS2CPacket;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.network.packet.HandshakeC2SPacket;

@@ -1,4 +1,4 @@
-package me.i509.fabric.trampoline.mixin;
+package xyz.onblock.fabric.trampoline.mixin;
 
 import java.util.UUID;
 
@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.mojang.authlib.GameProfile;
 
-import me.i509.fabric.trampoline.TrampolineServerMod;
-import me.i509.fabric.trampoline.accessors.BungeeConnectionModifier;
+import xyz.onblock.fabric.trampoline.Trampoline;
+import xyz.onblock.fabric.trampoline.accessors.BungeeConnectionModifier;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.network.ServerLoginNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -51,6 +51,6 @@ public class MixinServerLoginNetworkHandler {
                 profile.getProperties().put(property.getName(), property);
             }
         }
-        TrampolineServerMod.LOGGER.info(TrampolineServerMod.PREFIX + "Real UUID of player {} is {}", profile.getName(), profile.getId());
+        Trampoline.LOGGER.info(Trampoline.PREFIX + "Real UUID of player {} is {}", profile.getName(), profile.getId());
     }
 }

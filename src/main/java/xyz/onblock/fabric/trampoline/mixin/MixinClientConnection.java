@@ -1,4 +1,4 @@
-package me.i509.fabric.trampoline.mixin;
+package xyz.onblock.fabric.trampoline.mixin;
 
 import java.net.InetSocketAddress;
 import java.util.UUID;
@@ -11,7 +11,7 @@ import com.google.gson.GsonBuilder;
 import com.mojang.authlib.properties.Property;
 
 import io.netty.channel.Channel;
-import me.i509.fabric.trampoline.accessors.BungeeConnectionModifier;
+import xyz.onblock.fabric.trampoline.accessors.BungeeConnectionModifier;
 import net.minecraft.network.ClientConnection;
 
 @Mixin(ClientConnection.class)

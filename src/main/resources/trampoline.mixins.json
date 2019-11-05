@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "me.i509.fabric.trampoline.mixin",
+  "package": "xyz.onblock.fabric.trampoline",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
@@ -11,7 +11,8 @@
     "MixinServerLoginNetworkHandler",
     "MixinServerPlayerEntity",
     "MixinServerConfigHandler",
-    "MixinMinecraftServer"
+    "MixinMinecraftServer",
+    "MixinCommandManager"
   ],
   "injectors": {
     "defaultRequire": 1

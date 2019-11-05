@@ -1,6 +1,6 @@
-package me.i509.fabric.trampoline.mixin;
+package xyz.onblock.fabric.trampoline.mixin;
 
-import me.i509.fabric.trampoline.MixinHelpers;
+import xyz.onblock.fabric.trampoline.MixinHelpers;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.network.ServerHandshakeNetworkHandler;
 import net.minecraft.server.network.packet.HandshakeC2SPacket;

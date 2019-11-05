@@ -1,4 +1,4 @@
-package me.i509.fabric.trampoline.accessors;
+package xyz.onblock.fabric.trampoline.accessors;
 
 public interface HandshakeC2SPacketModifier {
     String getAddress();

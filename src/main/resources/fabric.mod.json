@@ -6,20 +6,20 @@
   "name": "Trampoline",
   "description": "Adds support for Bungeecord IP-Forwarding on fabric servers",
   "authors": [
-    "i509VCB"
+    "i509VCB",
+    "Forked by CODY_AI"
   ],
   "contact": {
-    "homepage": "https://github.com/i509VCB/Trampoline",
-    "sources": "https://github.com/i509VCB/Trampoline"
+    "homepage": "https://onblock.xyz/",
+    "sources": "https://github.com/OnBlock/Trampoline?organization=OnBlock&organization=OnBlock"
   },
 
   "license": "MIT",
-  "icon": "assets/trampoline/icon.png",
 
   "environment": "server",
   "entrypoints": {
     "server": [
-      "me.i509.fabric.trampoline.TrampolineServerMod"
+      "xyz.onblock.fabric.trampoline.Trampoline"
     ]
   },
   "mixins": [
@@ -27,11 +27,9 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.4.0",
-    "fabric": "*"
+    "fabricloader": ">=0.4.0"
   },
   "suggests": {
-    "flamingo": "*"
   },
   "custom": {
     "fabric-networking:shouldHandshake": false
