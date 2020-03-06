@@ -2,13 +2,13 @@ package me.i509.fabric.trampoline.mixin;
 
 import java.io.IOException;
 
+import net.minecraft.network.packet.c2s.handshake.HandshakeC2SPacket;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
 import me.i509.fabric.trampoline.accessors.HandshakeC2SPacketModifier;
 import net.minecraft.network.NetworkState;
-import net.minecraft.server.network.packet.HandshakeC2SPacket;
 import net.minecraft.util.PacketByteBuf;
 
 @Mixin(HandshakeC2SPacket.class)
@@ -16,15 +16,14 @@ public class MixinHandshakeC2SPacket implements HandshakeC2SPacketModifier {
 
     @Shadow
     private int port;
-    
-    @Shadow
-    private NetworkState state;
-    
-    @Shadow
-    private int version;
-    
+
     @Shadow
     private String address;
+
+
+    @Shadow private NetworkState intendedState;
+
+    @Shadow private int protocolVersion;
 
     @Override
     public void setAddress(String address) {
@@ -47,9 +46,9 @@ public class MixinHandshakeC2SPacket implements HandshakeC2SPacketModifier {
      */
     @Overwrite
     public void read(PacketByteBuf byteBuf) throws IOException {
-        this.version = byteBuf.readVarInt();
+        this.protocolVersion = byteBuf.readVarInt();
         this.address = byteBuf.readString(Short.MAX_VALUE);
         this.port = byteBuf.readUnsignedShort();
-        this.state = NetworkState.byId(byteBuf.readVarInt());
+        this.intendedState = NetworkState.byId(byteBuf.readVarInt());
     }
 }

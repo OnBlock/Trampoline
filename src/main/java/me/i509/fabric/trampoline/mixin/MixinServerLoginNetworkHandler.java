@@ -17,13 +17,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.UUID;
 
 @Mixin(ServerLoginNetworkHandler.class)
-public class MixinServerLoginNetworkHandler {
+public abstract class MixinServerLoginNetworkHandler {
     
     @Shadow
     private GameProfile profile;
-    
-    @Shadow
-    public ClientConnection client;
     
     @Shadow
     private ServerPlayerEntity clientEntity;
@@ -31,10 +28,12 @@ public class MixinServerLoginNetworkHandler {
     @Shadow
     private void disconnect(Text text_1) {}
 
-    @Inject(at = @At(value = "FIELD", target = "Lnet/minecraft/server/network/ServerLoginNetworkHandler$State;READY_TO_ACCEPT:Lnet/minecraft/server/network/ServerLoginNetworkHandler$State;", opcode = Opcodes.GETSTATIC), method = "onHello(Lnet/minecraft/server/network/packet/LoginHelloC2SPacket;)V", cancellable = true)
+    @Shadow public abstract ClientConnection getConnection();
+
+    @Inject(at = @At(value = "FIELD", target = "Lnet/minecraft/server/network/ServerLoginNetworkHandler$State;READY_TO_ACCEPT:Lnet/minecraft/server/network/ServerLoginNetworkHandler$State;", opcode = Opcodes.GETSTATIC), method = "onHello(Lnet/minecraft/network/packet/c2s/login/LoginHelloC2SPacket;)V", cancellable = true)
     public void onHello(CallbackInfo ci) {
         UUID uuid;
-        BungeeConnectionModifier bungeeConnection = (BungeeConnectionModifier) client;
+        BungeeConnectionModifier bungeeConnection = (BungeeConnectionModifier) this.getConnection();
         
         if (bungeeConnection.getSpoofedUUID() != null) {
             uuid = bungeeConnection.getSpoofedUUID();

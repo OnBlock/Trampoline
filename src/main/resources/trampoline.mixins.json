@@ -11,7 +11,8 @@
     "MixinServerLoginNetworkHandler",
     "MixinServerPlayerEntity",
     "MixinServerConfigHandler",
-    "MixinMinecraftServer"
+    "MixinMinecraftServer",
+    "MixinCommandManager"
   ],
   "injectors": {
     "defaultRequire": 1

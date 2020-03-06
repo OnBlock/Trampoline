@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Trampoline",
-  "description": "Adds support for Bungeecord IP-Forwarding on fabric servers",
+  "description": "Adds support for Bungeecord/Waterfall IP-Forwarding on fabric servers",
   "authors": [
     "i509VCB"
   ],
@@ -27,13 +27,8 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.4.0",
-    "fabric": ">=0.4.23+build.276-1.15"
+    "fabricloader": ">=0.4.0"
   },
   "suggests": {
-    "flamingo": "*"
-  },
-  "custom": {
-    "fabric-networking:shouldHandshake": false
   }
 }

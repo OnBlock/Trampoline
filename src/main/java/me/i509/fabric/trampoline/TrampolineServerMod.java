@@ -11,17 +11,12 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.mojang.brigadier.tree.RootCommandNode;
 import me.i509.fabric.trampoline.accessors.BungeeProxiedPlayer;
 import net.fabricmc.api.DedicatedServerModInitializer;
-import net.fabricmc.fabric.api.registry.CommandRegistry;
 import net.minecraft.command.EntitySelector;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.CommandSource;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.ClickEvent;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.text.Texts;
+import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,6 +29,7 @@ import static net.minecraft.command.arguments.EntityArgumentType.player;
 public class TrampolineServerMod implements DedicatedServerModInitializer {
     public static final Logger LOGGER = LogManager.getLogger("Fabric-Trampoline");
     public static final String PREFIX = "[Trampoline-Fabric] ";
+    public static CommandDispatcher<ServerCommandSource> dispatcher;
 
     public static BungeeProxiedPlayer adapt(ServerPlayerEntity entity) {
         return (BungeeProxiedPlayer) entity;
@@ -44,22 +40,22 @@ public class TrampolineServerMod implements DedicatedServerModInitializer {
         LOGGER.info(PREFIX + "Enabling Trampoline");
         LOGGER.warn(PREFIX + "The server is in offline mode to allow connection to Bungeecord. Please secure your server using the tutorial below, otherwise anyone can join the server:");
         LOGGER.warn(PREFIX + "https://www.spigotmc.org/wiki/firewall-guide/");
-        CommandRegistry.INSTANCE.register(true, this::registerCommands);
+        registerCommands();
     }
 
-    private void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
+    private void registerCommands() {
         RootCommandNode<ServerCommandSource> root = dispatcher.getRoot();
 
         LiteralCommandNode<ServerCommandSource> bungee = CommandManager.literal("bungee-trampoline").executes(this::aboutThis).build();
         LiteralCommandNode<ServerCommandSource> redirect = CommandManager.literal("trampoline").executes(this::aboutThis).redirect(bungee).build();
 
-        LiteralCommandNode<ServerCommandSource> info = CommandManager.literal("info").requires(s -> s.hasPermissionLevel(4)).executes(this::getInfoSelf).build();
+        LiteralCommandNode<ServerCommandSource> info = CommandManager.literal("trampoline-info").requires(s -> s.hasPermissionLevel(4)).executes(this::getInfoSelf).build();
 
         ArgumentCommandNode<ServerCommandSource, EntitySelector> otherTarget = CommandManager.argument("player", player()).executes(this::getInfoTargetted)
                 .suggests(TrampolineServerMod::playerSuggestions).build();
 
         info.addChild(otherTarget);
-        bungee.addChild(info);
+        root.addChild(info);
         root.addChild(bungee);
         root.addChild(redirect);
     }
@@ -93,13 +89,14 @@ public class TrampolineServerMod implements DedicatedServerModInitializer {
         source.sendFeedback(new LiteralText("Allows IP-Forwarding on Fabric servers connected to Bungeecord").formatted(Formatting.GRAY), false);
         source.sendFeedback(new LiteralText("By i509VCB").formatted(Formatting.GRAY), false);
         
-        Text t = new LiteralText("https://github.com/i509VCB/Trampoline").setStyle((new Style().setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/i509VCB/Trampoline")))).formatted(Formatting.YELLOW);
+        Text text = new LiteralText("https://github.com/i509VCB/Trampoline").setStyle((new Style().setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/i509VCB/Trampoline")))).formatted(Formatting.YELLOW);
         
-        source.sendFeedback(new LiteralText("Github Link: ").formatted(Formatting.GREEN).append(t), false);
+        source.sendFeedback(new LiteralText("Github Link: ").formatted(Formatting.GREEN).append(text), false);
         return 1;
     }
 
     private static CompletableFuture<Suggestions> playerSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) {
         return CommandSource.suggestMatching(context.getSource().getMinecraftServer().getPlayerNames(), builder);
     }
+
 }

@@ -14,11 +14,11 @@ import net.minecraft.server.network.ServerPlayerEntity;
 public class MixinServerPlayerEntity implements BungeeProxiedPlayer {
     
     @Shadow
-    private ServerPlayNetworkHandler networkHandler;
+    public ServerPlayNetworkHandler networkHandler;
     
     @Override
     public InetSocketAddress getRealAddress() {
-        return ((BungeeConnectionModifier) networkHandler.client).getRealAddress();
+        return ((BungeeConnectionModifier) networkHandler.getConnection()).getRealAddress();
     }
     
 }
